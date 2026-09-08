@@ -1,0 +1,1659 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IRTRA StormSafe | Sistema de Seguridad</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --azul:#1597ff;
+    --azulClaro:#62c5ff;
+    --amarillo:#ffc400;
+    --rojo:#ff3b4f;
+    --verde:#51e36c;
+    --fondo:#030912;
+    --fondo2:#071421;
+    --texto:#f4f8ff;
+    --gris:#9aaabd;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--fondo);
+    color:var(--texto);
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ===== NAVEGACIÓN ===== */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    background:rgba(2,9,17,.85);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(98,197,255,.15);
+    z-index:1000;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo span{
+    color:var(--amarillo);
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#dbe8f5;
+    font-size:14px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--azulClaro);
+}
+
+.nav-button{
+    border:1px solid var(--amarillo);
+    color:var(--amarillo)!important;
+    padding:9px 15px;
+    border-radius:8px;
+}
+
+/* ===== PORTADA ===== */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:120px 8% 80px;
+    overflow:hidden;
+
+    background:
+    linear-gradient(90deg,
+        rgba(2,8,15,.96) 0%,
+        rgba(2,8,15,.72) 48%,
+        rgba(2,8,15,.25) 100%
+    ),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStgI9xK2EdRsS8uk6JpwR_iQKZAF_XjgYRkiCjA8xgZg&s=10");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+/* Relámpago */
+
+.lightning{
+    position:absolute;
+    inset:0;
+    background:white;
+    opacity:0;
+    pointer-events:none;
+    animation:rayo 8s infinite;
+}
+
+@keyframes rayo{
+    0%,89%,93%,96%,100%{opacity:0}
+    90%{opacity:.22}
+    91%{opacity:0}
+    92%{opacity:.12}
+    94%{opacity:.28}
+    95%{opacity:0}
+}
+
+.hero-content{
+    max-width:720px;
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    margin-bottom:25px;
+    border-radius:30px;
+    border:1px solid rgba(98,197,255,.4);
+    background:rgba(21,151,255,.1);
+    color:var(--azulClaro);
+    font-size:13px;
+}
+
+.hero h1{
+    font-size:clamp(55px,8vw,100px);
+    line-height:.9;
+    letter-spacing:-4px;
+    margin-bottom:30px;
+}
+
+.hero h1 span{
+    color:var(--amarillo);
+}
+
+.hero h2{
+    max-width:650px;
+    font-size:21px;
+    font-weight:400;
+    line-height:1.6;
+    color:#dce8f3;
+    margin-bottom:35px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 22px;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:var(--azul);
+    box-shadow:0 0 25px rgba(21,151,255,.3);
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 35px rgba(21,151,255,.55);
+}
+
+.btn-secondary{
+    border:1px solid rgba(255,255,255,.3);
+    background:rgba(255,255,255,.05);
+}
+
+.btn-secondary:hover{
+    background:rgba(255,255,255,.12);
+}
+
+/* Estado flotante */
+
+.status-panel{
+    position:absolute;
+    right:8%;
+    bottom:12%;
+    width:285px;
+    padding:25px;
+    border-radius:18px;
+    background:rgba(4,16,29,.85);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(98,197,255,.3);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.status-title{
+    color:var(--gris);
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:15px 0;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.status-dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--verde);
+    box-shadow:0 0 15px var(--verde);
+    animation:pulso 2s infinite;
+}
+
+@keyframes pulso{
+    50%{
+        transform:scale(1.5);
+    }
+}
+
+.status-description{
+    color:var(--gris);
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* ===== SECCIONES ===== */
+
+section{
+    padding:100px 8%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title span{
+    color:var(--azulClaro);
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.section-title h2{
+    font-size:42px;
+    margin-top:10px;
+}
+
+.section-title p{
+    max-width:700px;
+    margin:15px auto 0;
+    color:var(--gris);
+    line-height:1.7;
+}
+
+/* ===== PROBLEMA / SOLUCIÓN ===== */
+
+.dark-section{
+    background:var(--fondo2);
+}
+
+.two-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.card{
+    padding:38px;
+    border-radius:18px;
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(98,197,255,.4);
+}
+
+.icon{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:var(--gris);
+    line-height:1.8;
+}
+
+.problem h3{
+    color:var(--rojo);
+}
+
+.solution h3{
+    color:var(--verde);
+}
+
+/* ===== FUNCIONAMIENTO ===== */
+
+.flow{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.flow-card{
+    text-align:center;
+    padding:28px 15px;
+    border-radius:15px;
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(98,197,255,.15);
+    transition:.3s;
+}
+
+.flow-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--azul);
+}
+
+.flow-number{
+    color:var(--azulClaro);
+    font-size:11px;
+    margin-bottom:15px;
+}
+
+.flow-icon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.flow-card h3{
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+.flow-card p{
+    color:var(--gris);
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* ===== PROTOTIPO ===== */
+
+.prototype{
+    background:#02070d;
+}
+
+.prototype-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.tinkercad{
+    min-height:380px;
+    border-radius:20px;
+    border:1px dashed rgba(98,197,255,.45);
+    background:linear-gradient(135deg,#071421,#02070d);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px;
+    overflow:hidden;
+}
+
+/* ===== ESPACIO PARA FOTO DEL CIRCUITO ===== */
+
+.tinkercad img{
+    width:100%;
+    max-width:800px;
+    border-radius:15px;
+    display:block;
+}
+
+.tinkercad h3{
+    font-size:25px;
+    margin-bottom:10px;
+}
+
+.tinkercad p{
+    color:var(--gris);
+}
+
+.prototype-info>p{
+    color:var(--gris);
+    line-height:1.8;
+    margin-top:15px;
+}
+
+.components{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:25px;
+}
+
+.component{
+    padding:15px;
+    border-radius:10px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.07);
+}
+
+/* ===== ESTADOS ===== */
+
+.states{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-top:65px;
+}
+
+.state{
+    padding:35px;
+    border-radius:18px;
+    text-align:center;
+    transition:.3s;
+}
+
+.state:hover{
+    transform:translateY(-7px);
+}
+
+.state .state-icon{
+    font-size:43px;
+    margin-bottom:15px;
+}
+
+.state h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.state p{
+    color:var(--gris);
+    line-height:1.6;
+}
+
+.normal{
+    background:rgba(81,227,108,.04);
+    border:1px solid rgba(81,227,108,.4);
+}
+
+.normal h3{
+    color:var(--verde);
+}
+
+.warning{
+    background:rgba(255,196,0,.04);
+    border:1px solid rgba(255,196,0,.4);
+}
+
+.warning h3{
+    color:var(--amarillo);
+}
+
+.emergency{
+    background:rgba(255,59,79,.04);
+    border:1px solid rgba(255,59,79,.4);
+}
+
+.emergency h3{
+    color:var(--rojo);
+}
+
+/* ===== ODS ===== */
+
+.ods{
+    max-width:1000px;
+    margin:auto;
+    padding:45px;
+    display:grid;
+    grid-template-columns:170px 1fr;
+    gap:40px;
+    align-items:center;
+    border-radius:22px;
+    background:linear-gradient(120deg,rgba(21,151,255,.08),rgba(81,227,108,.04));
+    border:1px solid rgba(98,197,255,.2);
+}
+
+.ods-number{
+    width:150px;
+    height:150px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    background:#3f7e44;
+    font-weight:bold;
+    text-align:center;
+}
+
+.ods-number strong{
+    font-size:55px;
+}
+
+.ods h3{
+    font-size:27px;
+    margin-bottom:15px;
+}
+
+.ods p{
+    color:var(--gris);
+    line-height:1.8;
+}
+
+/* ===== RECURSOS ===== */
+
+.resources{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.resource .big-icon{
+    font-size:43px;
+    margin-bottom:18px;
+}
+
+.resource p{
+    margin-bottom:23px;
+}
+
+.resource-button{
+    display:inline-block;
+    padding:11px 18px;
+    border:1px solid var(--azul);
+    color:var(--azulClaro);
+    border-radius:7px;
+    transition:.3s;
+}
+
+.resource-button:hover{
+    background:var(--azul);
+    color:white;
+}
+
+/* ===== PODCAST ===== */
+
+.podcast{
+    max-width:850px;
+    margin:auto;
+    text-align:center;
+}
+
+/* ===== EQUIPO ===== */
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    max-width:1000px;
+    margin:auto;
+}
+
+.member{
+    text-align:center;
+}
+
+.avatar{
+    width:150px;
+    height:150px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(135deg,#0e6dc0,#071421);
+    border:2px solid rgba(98,197,255,.5);
+    font-size:35px;
+    overflow:hidden;
+}
+
+/* ===== ESPACIO PARA FOTOS DEL EQUIPO ===== */
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.member p{
+    color:var(--gris);
+    margin-top:7px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    padding:45px 8%;
+    text-align:center;
+    background:#01050a;
+    border-top:1px solid rgba(98,197,255,.15);
+}
+
+.footer-logo{
+    font-size:25px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.footer-logo span{
+    color:var(--amarillo);
+}
+
+footer p{
+    color:var(--gris);
+    font-size:13px;
+    line-height:1.6;
+}
+
+.copyright{
+    margin-top:25px;
+    color:#5d7183;
+    font-size:12px;
+}
+
+/* ===== CELULAR ===== */
+
+@media(max-width:950px){
+
+    .nav-links,
+    .status-panel{
+        display:none;
+    }
+
+    .flow{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .prototype-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    section{
+        padding:75px 6%;
+    }
+
+    .hero{
+        padding:120px 6% 70px;
+        background-attachment:scroll;
+    }
+
+    .hero h1{
+        font-size:55px;
+    }
+
+    .hero h2{
+        font-size:18px;
+    }
+
+    .two-grid,
+    .resources,
+    .states,
+    .team-grid,
+    .flow{
+        grid-template-columns:1fr;
+    }
+
+    .components{
+        grid-template-columns:1fr;
+    }
+
+    .ods{
+        grid-template-columns:1fr;
+        text-align:center;
+        justify-items:center;
+    }
+
+    .section-title h2{
+        font-size:32px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== NAVEGACIÓN ===== -->
+
+<nav>
+
+<a href="#inicio" class="logo">
+    ⛈️ IRTRA <span>STORMSAFE</span>
+</a>
+
+<ul class="nav-links">
+
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#proyecto">Proyecto</a></li>
+<li><a href="#sistema">Sistema</a></li>
+<li><a href="#prototipo">Prototipo</a></li>
+<li><a href="#recursos">Recursos</a></li>
+<li><a href="#equipo">Equipo</a></li>
+
+<li>
+<a href="#podcast" class="nav-button">
+    Podcast
+</a>
+</li>
+
+</ul>
+
+</nav>
+
+
+<!-- ===== PORTADA ===== -->
+
+<header class="hero" id="inicio">
+
+<div class="lightning"></div>
+
+<div class="hero-content">
+
+<div class="badge">
+    ⚡ PROYECTO DE AUTOMATIZACIÓN Y CONTROL
+</div>
+
+<h1>
+    IRTRA<br>
+    <span>STORMSAFE</span>
+</h1>
+
+<h2>
+    Sistema inteligente de alerta y suspensión preventiva
+    de atracciones ante condiciones climáticas adversas.
+</h2>
+
+<div class="hero-buttons">
+
+<a href="#proyecto" class="btn btn-primary">
+    CONOCER EL PROYECTO ↓
+</a>
+
+<a href="#prototipo" class="btn btn-secondary">
+    VER PROTOTIPO
+</a>
+
+</div>
+
+</div>
+
+
+<div class="status-panel">
+
+<div class="status-title">
+    ESTADO DEL SISTEMA
+</div>
+
+<div class="status">
+
+<div class="status-dot"></div>
+
+NORMAL
+
+</div>
+
+<div class="status-description">
+
+Condiciones seguras para la operación.
+StormSafe permanece preparado ante una alerta.
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ===== PROBLEMÁTICA ===== -->
+
+<section class="dark-section" id="proyecto">
+
+<div class="section-title">
+
+<span>
+    01 — EL PROYECTO
+</span>
+
+<h2>
+    Seguridad ante un clima impredecible
+</h2>
+
+<p>
+    StormSafe nace como una propuesta de automatización
+    enfocada en la seguridad operacional de las atracciones.
+</p>
+
+</div>
+
+
+<div class="two-grid">
+
+<div class="card problem">
+
+<div class="icon">
+    ⛈️
+</div>
+
+<h3>
+    La problemática
+</h3>
+
+<p>
+
+Durante la operación de un parque de atracciones
+pueden presentarse condiciones meteorológicas adversas,
+como lluvias intensas y tormentas eléctricas.
+
+<br><br>
+
+Determinadas atracciones podrían requerir una suspensión
+preventiva ante estas condiciones para reducir riesgos
+para visitantes y trabajadores.
+
+</p>
+
+</div>
+
+
+<div class="card solution">
+
+<div class="icon">
+    🛡️
+</div>
+
+<h3>
+    Nuestra solución
+</h3>
+
+<p>
+
+IRTRA StormSafe propone un sistema electrónico autónomo
+capaz de recibir una señal de alerta meteorológica y
+activar un protocolo preventivo.
+
+<br><br>
+
+El prototipo utiliza indicadores visuales y sonoros
+para representar los estados de operación, precaución
+y suspensión de una atracción.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===== FUNCIONAMIENTO ===== -->
+
+<section id="sistema">
+
+<div class="section-title">
+
+<span>
+    02 — FUNCIONAMIENTO
+</span>
+
+<h2>
+    De la tormenta a la respuesta
+</h2>
+
+<p>
+    El prototipo demuestra la lógica de control que permitiría
+    reaccionar ante una alerta meteorológica.
+</p>
+
+</div>
+
+
+<div class="flow">
+
+<div class="flow-card">
+
+<div class="flow-number">
+    PASO 01
+</div>
+
+<div class="flow-icon">
+    ⛈️
+</div>
+
+<h3>
+    Condición climática
+</h3>
+
+<p>
+    Se presenta una condición meteorológica que requiere atención.
+</p>
+
+</div>
+
+
+<div class="flow-card">
+
+<div class="flow-number">
+    PASO 02
+</div>
+
+<div class="flow-icon">
+    🔘
+</div>
+
+<h3>
+    Señal de entrada
+</h3>
+
+<p>
+    Un pulsador simula la señal proveniente de un sistema meteorológico.
+</p>
+
+</div>
+
+
+<div class="flow-card">
+
+<div class="flow-number">
+    PASO 03
+</div>
+
+<div class="flow-icon">
+    🤖
+</div>
+
+<h3>
+    Procesamiento
+</h3>
+
+<p>
+    Arduino procesa la entrada y determina el estado correspondiente.
+</p>
+
+</div>
+
+
+<div class="flow-card">
+
+<div class="flow-number">
+    PASO 04
+</div>
+
+<div class="flow-icon">
+    🚨
+</div>
+
+<h3>
+    Alerta
+</h3>
+
+<p>
+    Los indicadores luminosos y el buzzer comunican el nivel de riesgo.
+</p>
+
+</div>
+
+
+<div class="flow-card">
+
+<div class="flow-number">
+    PASO 05
+</div>
+
+<div class="flow-icon">
+    🎢
+</div>
+
+<h3>
+    Suspensión
+</h3>
+
+<p>
+    El sistema representa la orden de suspensión preventiva.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===== PROTOTIPO ===== -->
+
+<section class="prototype" id="prototipo">
+
+<div class="section-title">
+
+<span>
+    03 — INGENIERÍA
+</span>
+
+<h2>
+    Nuestro prototipo
+</h2>
+
+<p>
+    Diseñado con Arduino Uno R3 y simulado mediante Tinkercad Circuits.
+</p>
+
+</div>
+
+
+<div class="prototype-grid">
+
+
+<!-- =====================================================
+     🔌 FOTO DEL CIRCUITO TINKERCAD
+     
+     AQUÍ PUEDES PONER LA FOTO REAL DEL CIRCUITO.
+
+     EJEMPLO:
+     <img src="circuito.jpg" alt="Circuito Tinkercad">
+
+     Si la imagen está en una carpeta:
+     <img src="imagenes/circuito.jpg" alt="Circuito Tinkercad">
+===================================================== -->
+
+<div class="tinkercad">
+
+<div>
+
+<h3>
+    🔌 CIRCUITO TINKERCAD
+</h3>
+
+<p>
+    🖼️ PEGA AQUÍ LA FOTO O CAPTURA DEL CIRCUITO TERMINADO
+</p>
+
+<!--
+    PEGA AQUÍ TU IMAGEN:
+
+    <img src="NOMBRE-DE-TU-FOTO.jpg"
+         alt="Circuito Tinkercad">
+-->
+
+</div>
+
+</div>
+
+
+<div class="prototype-info">
+
+<h2>
+    Componentes
+</h2>
+
+<p>
+    Los componentes trabajan en conjunto para representar
+    las entradas, procesamiento y salidas del sistema
+    automatizado.
+</p>
+
+<div class="components">
+
+<div class="component">
+    🤖 Arduino Uno R3
+</div>
+
+<div class="component">
+    🔘 Push Buttons
+</div>
+
+<div class="component">
+    🌈 LED RGB
+</div>
+
+<div class="component">
+    💡 LEDs estándar
+</div>
+
+<div class="component">
+    🔊 Buzzer
+</div>
+
+<div class="component">
+    🔌 Protoboard
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ===== ESTADOS ===== -->
+
+<div class="states">
+
+<div class="state normal">
+
+<div class="state-icon">
+    🟢
+</div>
+
+<h3>
+    NORMAL
+</h3>
+
+<p>
+    Condiciones seguras. La atracción puede operar normalmente.
+</p>
+
+</div>
+
+
+<div class="state warning">
+
+<div class="state-icon">
+    🟡
+</div>
+
+<h3>
+    PRECAUCIÓN
+</h3>
+
+<p>
+    Se detecta una condición que requiere atención preventiva.
+</p>
+
+</div>
+
+
+<div class="state emergency">
+
+<div class="state-icon">
+    🔴
+</div>
+
+<h3>
+    EMERGENCIA
+</h3>
+
+<p>
+    Se activa la alarma y se representa la suspensión de la atracción.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===== ODS ===== -->
+
+<section>
+
+<div class="section-title">
+
+<span>
+    04 — IMPACTO
+</span>
+
+<h2>
+    Objetivos de Desarrollo Sostenible
+</h2>
+
+</div>
+
+
+<div class="ods">
+
+<div class="ods-number">
+
+<strong>
+    3
+</strong>
+
+SALUD Y<br>
+BIENESTAR
+
+</div>
+
+
+<div>
+
+<h3>
+    ODS 3 — Salud y Bienestar
+</h3>
+
+<p>
+
+StormSafe busca contribuir a la prevención de riesgos
+mediante la aplicación de automatización y sistemas
+electrónicos de alerta.
+
+<br><br>
+
+La propuesta prioriza una respuesta preventiva ante
+situaciones que podrían afectar la seguridad de
+visitantes y trabajadores.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ===== RECURSOS =====
+     
+     AQUÍ SOLO TIENES QUE CAMBIAR LOS href="#" POR TUS LINKS.
+===================================================== -->
+
+<section class="dark-section" id="recursos">
+
+<div class="section-title">
+
+<span>
+    05 — CENTRO DE RECURSOS
+</span>
+
+<h2>
+    Explora el proyecto
+</h2>
+
+<p>
+    Todos los productos desarrollados por nuestro equipo
+    se encuentran disponibles desde esta página.
+</p>
+
+</div>
+
+
+<div class="resources">
+
+
+<!-- ===== INFOGRAFÍA ===== -->
+
+<div class="card resource">
+
+<div class="big-icon">
+    🖼️
+</div>
+
+<h3>
+    Infografía
+</h3>
+
+<p>
+    Resumen visual de la problemática, solución,
+    funcionamiento e impacto de StormSafe.
+</p>
+
+<!-- 🔗 PEGA AQUÍ EL LINK DE LA INFOGRAFÍA -->
+
+<a href="PEGA-AQUI-LINK-INFOGRAFIA"
+   class="resource-button"
+   target="_blank">
+
+    VER INFOGRAFÍA →
+
+</a>
+
+</div>
+
+
+<!-- ===== INVESTIGACIÓN ===== -->
+
+<div class="card resource">
+
+<div class="big-icon">
+    📚
+</div>
+
+<h3>
+    Investigación
+</h3>
+
+<p>
+    Documento formal con los fundamentos,
+    investigación y desarrollo del proyecto.
+</p>
+
+<!-- 🔗 PEGA AQUÍ EL LINK DEL DOCUMENTO -->
+
+<a href="PEGA-AQUI-LINK-INVESTIGACION"
+   class="resource-button"
+   target="_blank">
+
+    VER DOCUMENTO →
+
+</a>
+
+</div>
+
+
+<!-- ===== TINKERCAD ===== -->
+
+<div class="card resource">
+
+<div class="big-icon">
+    🔌
+</div>
+
+<h3>
+    Tinkercad
+</h3>
+
+<p>
+    Accede a la simulación digital del circuito
+    desarrollado por nuestro equipo.
+</p>
+
+<!-- 🔗 PEGA AQUÍ EL LINK DE TINKERCAD -->
+
+<a href="PEGA-AQUI-LINK-TINKERCAD"
+   class="resource-button"
+   target="_blank">
+
+    VER CIRCUITO →
+
+</a>
+
+</div>
+
+
+<!-- ===== GITHUB ===== -->
+
+<div class="card resource">
+
+<div class="big-icon">
+    💻
+</div>
+
+<h3>
+    GitHub
+</h3>
+
+<p>
+    Código fuente y archivos digitales utilizados
+    para desarrollar StormSafe.
+</p>
+
+<!-- 🔗 PEGA AQUÍ EL LINK DE GITHUB -->
+
+<a href="PEGA-AQUI-LINK-GITHUB"
+   class="resource-button"
+   target="_blank">
+
+    VER REPOSITORIO →
+
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ===== PODCAST ===== -->
+
+<section id="podcast">
+
+<div class="section-title">
+
+<span>
+    06 — PODCAST
+</span>
+
+<h2>
+    Escucha StormSafe
+</h2>
+
+<p>
+    Conoce la historia, funcionamiento e impacto
+    de nuestra propuesta.
+</p>
+
+</div>
+
+
+<div class="card resource podcast">
+
+<div class="big-icon">
+    🎙️
+</div>
+
+<h3>
+    IRTRA StormSafe — Podcast
+</h3>
+
+<p>
+    Nuestro equipo explica la problemática identificada,
+    la lógica del circuito, el funcionamiento del sistema
+    y su posible aplicación en un escenario real.
+</p>
+
+
+<!-- =====================================================
+     🎙️ LINK DEL PODCAST
+
+     PEGA AQUÍ EL LINK DEL PODCAST.
+
+     EJEMPLO:
+     https://drive.google.com/...
+     https://open.spotify.com/...
+     https://www.youtube.com/...
+===================================================== -->
+
+<a href="PEGA-AQUI-LINK-PODCAST"
+   class="resource-button"
+   target="_blank">
+
+    ▶ ESCUCHAR PODCAST
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ===== EQUIPO ===== -->
+
+<section class="dark-section" id="equipo">
+
+<div class="section-title">
+
+<span>
+    07 — EQUIPO
+</span>
+
+<h2>
+    Conoce al equipo
+</h2>
+
+<p>
+    Tres estudiantes, una solución de automatización.
+</p>
+
+</div>
+
+
+<div class="team-grid">
+
+
+<!-- ===== INTEGRANTE 1 ===== -->
+
+<div class="card member">
+
+<div class="avatar">
+
+<!-- 🖼️ PEGA AQUÍ LA FOTO DEL INTEGRANTE 1 -->
+
+<!--
+<img src="foto-integrante-1.jpg"
+     alt="Nombre Integrante 1">
+-->
+
+👨‍💻
+
+</div>
+
+<!-- ✏️ CAMBIA AQUÍ EL NOMBRE -->
+
+<h3>
+    NOMBRE INTEGRANTE 1
+</h3>
+
+<p>
+    Equipo IRTRA StormSafe
+</p>
+
+</div>
+
+
+<!-- ===== INTEGRANTE 2 ===== -->
+
+<div class="card member">
+
+<div class="avatar">
+
+<!-- 🖼️ PEGA AQUÍ LA FOTO DEL INTEGRANTE 2 -->
+
+<!--
+<img src="foto-integrante-2.jpg"
+     alt="Nombre Integrante 2">
+-->
+
+👩‍💻
+
+</div>
+
+<!-- ✏️ CAMBIA AQUÍ EL NOMBRE -->
+
+<h3>
+    NOMBRE INTEGRANTE 2
+</h3>
+
+<p>
+    Equipo IRTRA StormSafe
+</p>
+
+</div>
+
+
+<!-- ===== INTEGRANTE 3 ===== -->
+
+<div class="card member">
+
+<div class="avatar">
+
+<!-- 🖼️ PEGA AQUÍ LA FOTO DEL INTEGRANTE 3 -->
+
+<!--
+<img src="foto-integrante-3.jpg"
+     alt="Nombre Integrante 3">
+-->
+
+👨‍💻
+
+</div>
+
+<!-- ✏️ CAMBIA AQUÍ EL NOMBRE -->
+
+<h3>
+    NOMBRE INTEGRANTE 3
+</h3>
+
+<p>
+    Equipo IRTRA StormSafe
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+<div class="footer-logo">
+
+⛈️ IRTRA <span>STORMSAFE</span>
+
+</div>
+
+<p>
+
+Sistema inteligente de alerta y suspensión preventiva
+de atracciones ante condiciones climáticas adversas.
+
+</p>
+
+<div class="copyright">
+
+© 2026 IRTRA StormSafe · Proyecto Final de TICS · Undécimo
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* Animación al bajar por la página */
+
+const elementos = document.querySelectorAll(
+    ".card,.flow-card,.state,.member,.ods,.tinkercad"
+);
+
+const observer = new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.style.opacity="1";
+
+            entry.target.style.transform="translateY(0)";
+
+        }
+
+    });
+
+},{threshold:.12});
+
+
+elementos.forEach(elemento=>{
+
+    elemento.style.opacity="0";
+
+    elemento.style.transform="translateY(25px)";
+
+    elemento.style.transition=
+        "opacity .7s ease, transform .7s ease";
+
+    observer.observe(elemento);
+
+});
+
+</script>
+
+</body>
+
+</html>
+```

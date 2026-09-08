@@ -1497,22 +1497,11 @@ visitantes y trabajadores.
 <div class="card member">
 
 <div class="avatar">
-
-<!-- 🖼️ PEGA AQUÍ LA FOTO DEL INTEGRANTE 1 -->
-
-<!--
-<img src="Campos.jpg"
-     alt="Jóse Alejandro de León Camposeco">
--->
-
-👨‍💻
-
+    <img src="Campos.jpg" alt="José Alejandro de León Camposeco">
 </div>
 
-<!-- ✏️ CAMBIA AQUÍ EL NOMBRE -->
-
 <h3>
-    NOMBRE INTEGRANTE 1
+    José Alejandro de León Camposeco
 </h3>
 
 <p>
@@ -1527,22 +1516,11 @@ visitantes y trabajadores.
 <div class="card member">
 
 <div class="avatar">
-
-<!-- 🖼️ PEGA AQUÍ LA FOTO DEL INTEGRANTE 2 -->
-
-<!--
-<img src="VVVVVVVVVVV.jpg"
-     alt="Carmen Elizabeth Aguilar Berganza">
--->
-
-👩‍💻
-
+    <img src="vvvvvvvv.jpg" alt="Carmen Elizabeth Aguilar Berganza">
 </div>
 
-<!-- ✏️ CAMBIA AQUÍ EL NOMBRE -->
-
 <h3>
-    NOMBRE INTEGRANTE 2
+    Carmen Elizabeth Aguilar Berganza
 </h3>
 
 <p>
@@ -1557,22 +1535,11 @@ visitantes y trabajadores.
 <div class="card member">
 
 <div class="avatar">
-
-<!-- 🖼️ PEGA AQUÍ LA FOTO DEL INTEGRANTE 3 -->
-
-<!--
-<img src="fnan.jpg"
-     alt="José Fernando Morales Barrios">
--->
-
-👨‍💻
-
+    <img src="fnan.jpg" alt="José Fernando Morales Barrios">
 </div>
 
-<!-- ✏️ CAMBIA AQUÍ EL NOMBRE -->
-
 <h3>
-    NOMBRE INTEGRANTE 3
+    José Fernando Morales Barrios
 </h3>
 
 <p>
@@ -1585,75 +1552,5 @@ visitantes y trabajadores.
 </div>
 
 </section>
-
-
-<!-- ===== FOOTER ===== -->
-
-<footer>
-
-<div class="footer-logo">
-
-⛈️ IRTRA <span>STORMSAFE</span>
-
-</div>
-
-<p>
-
-Sistema inteligente de alerta y suspensión preventiva
-de atracciones ante condiciones climáticas adversas.
-
-</p>
-
-<div class="copyright">
-
-© 2026 IRTRA StormSafe · Proyecto Final de TICS · Undécimo
-
-</div>
-
-</footer>
-
-
-<script>
-
-/* Animación al bajar por la página */
-
-const elementos = document.querySelectorAll(
-    ".card,.flow-card,.state,.member,.ods,.tinkercad"
-);
-
-const observer = new IntersectionObserver(entries=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.style.opacity="1";
-
-            entry.target.style.transform="translateY(0)";
-
-        }
-
-    });
-
-},{threshold:.12});
-
-
-elementos.forEach(elemento=>{
-
-    elemento.style.opacity="0";
-
-    elemento.style.transform="translateY(25px)";
-
-    elemento.style.transition=
-        "opacity .7s ease, transform .7s ease";
-
-    observer.observe(elemento);
-
-});
-
-</script>
-
-</body>
-
 </html>
 ```

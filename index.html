@@ -1247,7 +1247,7 @@ y suspensión de una atracción.
 <div class="section-title">
 
 <span>
-  <!-- ===== CENTRO DE RECURSOS ===== -->
+ <!-- ===== CENTRO DE RECURSOS ===== -->
 
 <section class="resources-section" id="recursos">
 
@@ -1257,68 +1257,53 @@ y suspensión de una atracción.
     <p>Todos los productos desarrollados por nuestro equipo se encuentran disponibles desde esta página.</p>
 </div>
 
-<!-- GRID DE 2 COLUMNAS -->
-<div class="resources-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; max-width: 1000px; margin: 0 auto 30px auto;">
+<div class="resources-grid">
 
     <!-- 1. INFOGRAFÍA -->
-    <div class="card resource" style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-            <div class="big-icon">🖼️</div>
-            <h3>INFOGRAFÍA</h3>
-            <p>Resumen visual de la problemática, solución, funcionamiento e impacto de StormSafe.</p>
-        </div>
-        <div style="margin-top: 15px;">
-            <a href="IRTRA_StormSafe_infografia_QR_reales.pdf" class="resource-button" target="_blank" style="width: 100%; text-align: center;">VER INFOGRAFÍA →</a>
-        </div>
+    <div class="card resource">
+        <div class="big-icon">🖼️</div>
+        <h3>INFOGRAFÍA</h3>
+        <p>Resumen visual de la problemática, solución, funcionamiento e impacto de StormSafe.</p>
+        <a href="IRTRA_StormSafe_infografia_QR_reales.pdf" class="resource-button" target="_blank">VER INFOGRAFÍA →</a>
     </div>
 
     <!-- 2. INVESTIGACIÓN -->
-    <div class="card resource" style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-            <div class="big-icon">📚</div>
-            <h3>INVESTIGACIÓN</h3>
-            <p>Documento formal con los fundamentos, investigación y desarrollo del proyecto.</p>
-        </div>
+    <div class="card resource">
+        <div class="big-icon">📚</div>
+        <h3>INVESTIGACIÓN</h3>
+        <p>Documento formal con los fundamentos, investigación y desarrollo del proyecto.</p>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-            <a href="invstigfaionnnnppp.pdf" class="resource-button" target="_blank" style="flex: 1; text-align: center;">VER PDF →</a>
-            <a href="invstigfaionnnn.docx" class="resource-button" download style="border-color: #f39c12; color: #f39c12; flex: 1; text-align: center;">DESCARGAR WORD (.DOCX) ↓</a>
+            <a href="invstigfaionnnnppp.pdf" class="resource-button" target="_blank">VER PDF →</a>
+            <a href="invstigfaionnnn.docx" class="resource-button" download style="border-color: #f39c12; color: #f39c12;">DESCARGAR WORD (.DOCX) ↓</a>
         </div>
     </div>
 
     <!-- 3. CIRCUITO FÍSICO -->
-    <div class="card resource" style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-            <div class="big-icon">🔌</div>
-            <h3>CIRCUITO FÍSICO</h3>
-            <p>Demostración en video del circuito armado y funcionando en físico por nuestro equipo.</p>
-        </div>
-        <div style="margin-top: 15px;">
-            <a href="WhatsApp Video 2026-09-08 at 17.41.56.mp4" class="resource-button" target="_blank" style="width: 100%; text-align: center;">VER CIRCUITO →</a>
-        </div>
+    <div class="card resource">
+        <div class="big-icon">🔌</div>
+        <h3>CIRCUITO FÍSICO</h3>
+        <p>Demostración en video del circuito armado y funcionando en físico por nuestro equipo.</p>
+        <a href="WhatsApp Video 2026-09-08 at 17.41.56.mp4" class="resource-button" target="_blank">VER CIRCUITO →</a>
     </div>
 
     <!-- 4. GITHUB -->
-    <div class="card resource" style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-            <div class="big-icon">💻</div>
-            <h3>GITHUB</h3>
-            <p>Código fuente y archivos digitales utilizados para desarrollar StormSafe.</p>
-        </div>
-        <div style="margin-top: 15px;">
-            <a href="https://fflighx-aledl.github.io/ProyectoFinalTICS_deLeon1_Aguilar2_Morales3_Und-cimoB_IRTRA-STORMSAFE/" class="resource-button" target="_blank" style="width: 100%; text-align: center;">VER REPOSITORIO →</a>
-        </div>
+    <div class="card resource">
+        <div class="big-icon">💻</div>
+        <h3>GITHUB</h3>
+        <p>Código fuente y archivos digitales utilizados para desarrollar StormSafe.</p>
+        <a href="https://fflighx-aledl.github.io/ProyectoFinalTICS_deLeon1_Aguilar2_Morales3_Und-cimoB_IRTRA-STORMSAFE/" class="resource-button" target="_blank">VER REPOSITORIO →</a>
     </div>
 
-</div>
+    <!-- 5. COMENTARIO DEL CIRCUITO (OCUPA TODO EL ANCHO DE LA GRID) -->
+    <div class="card" style="grid-column: 1 / -1; margin-top: 20px; text-align: left; padding: 25px; border-left: 4px solid #00bcd4;">
+        <h4 style="margin: 0 0 10px 0; color: #00bcd4; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">
+            💡 Comentario sobre la demostración del circuito:
+        </h4>
+        <p style="margin: 0; line-height: 1.6; font-size: 0.95rem; opacity: 0.9; text-align: justify;">
+            En este video les mostramos un circuito que nos ejemplifica cómo funcionaría nuestro sistema de StormSafe para solucionar dicha problemática en las atracciones del IRTRA. Como el video lo menciona, hay diversos botones dependiendo de la situación climática. Por otro lado, también está la fotorresistencia, esta es la encargada de que al momento de detectar la sombra que emite el agrupamiento de nubes (cuando está a punto de haber alguna lluvia o tormenta) esta active una alarma, pero al momento de detectar luz, dicha alarma se apagará. Es por ello que en el video no se emite ninguna alarma proveniente de la fotorresistencia ya que esta no detectó ninguna sombra debido a que el entorno en el momento de la grabación era bastante iluminado.
+        </p>
+    </div>
 
-<!-- APARTADO DE COMENTARIO ACERCA DEL CIRCUITO -->
-<div class="card" style="max-width: 1000px; margin: 0 auto; padding: 25px; border-left: 4px solid #00bcd4; background: rgba(15, 23, 42, 0.6);">
-    <h4 style="margin: 0 0 10px 0; color: #00bcd4; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;">
-        💡 Comentario sobre la demostración del circuito:
-    </h4>
-    <p style="margin: 0; line-height: 1.6; font-size: 0.95rem; opacity: 0.9; text-align: justify;">
-        En este video les mostramos un circuito que nos ejemplifica cómo funcionaría nuestro sistema de StormSafe para solucionar dicha problemática en las atracciones del IRTRA. Como el video lo menciona, hay diversos botones dependiendo de la situación climática. Por otro lado, también está la fotorresistencia, esta es la encargada de que al momento de detectar la sombra que emite el agrupamiento de nubes (cuando está a punto de haber alguna lluvia o tormenta) esta active una alarma, pero al momento de detectar luz, dicha alarma se apagará. Es por ello que en el video no se emite ninguna alarma proveniente de la fotorresistencia ya que esta no detectó ninguna sombra debido a que el entorno en el momento de la grabación era bastante iluminado.
-    </p>
 </div>
 
 </section>
